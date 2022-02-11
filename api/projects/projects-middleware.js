@@ -18,10 +18,10 @@ function isValidProjectId(req, res, next) {
 
 function isValidProject(req, res, next) {
     const { name, description, completed } = req.body;
-    if(!name || !description || !completed){
-        res.status(400).json({ message: 'Please fill out all required fields'});
-    }else{
+    if(name && description && completed != null){
         next();
+    }else{
+        res.status(400).json({ message: 'Please fill out all required fields'});
     }
 }
 
