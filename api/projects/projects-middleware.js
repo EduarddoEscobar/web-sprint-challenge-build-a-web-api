@@ -11,15 +11,17 @@ function isValidProjectId(req, res, next) {
             }else{
                 res.status(404).json({ message: 'Project with specific ID was not found' });
             }
+        }).catch(() => {
+            res.status(500).json({ message: 'There was an error retrieving the project from the database'});
         })
 }
 
 function isValidProject(req, res, next) {
-    const { name, description } = req.body;
-    if(name && description){
-        next();
+    const { name, description, completed } = req.body;
+    if(!name || !description || !completed){
+        res.status(400).json({ message: 'Please fill out all required fields'});
     }else{
-        res.status(400).json({ message: 'Please fill out the name and description fields'});
+        next();
     }
 }
 

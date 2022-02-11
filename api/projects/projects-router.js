@@ -38,7 +38,7 @@ router.put('/:id', [middleware.isValidProjectId, middleware.isValidProject], (re
 router.delete('/:id', middleware.isValidProjectId, (req, res) => {
     Projects.remove(req.params.id)
         .then(() => {
-            res.status(200).json({});
+            res.status(200).json();
         }).catch(() => {
             res.status(500).json({message: "The project was unable to be deleted"});
         })
